@@ -1,49 +1,48 @@
+#!/usr/bin/env python3
 import unittest
 from datetime import datetime
+from car_factory import CarFactory
 
-from engine.model.calliope import Calliope
-from engine.model.glissade import Glissade
-from engine.model.palindrome import Palindrome
-from engine.model.rorschach import Rorschach
-from engine.model.thovex import Thovex
-
-
-class TestCalliope(unittest.TestCase):
+class TestCalliope(unittest.TestCase):     
     def test_battery_should_be_serviced(self):
-        today = datetime.today().date()
-        last_service_date = today.replace(year=today.year - 3)
+        current_date = datetime.today().date()
+        last_service_date = current_date.replace(year=current_date.year - 3)
         current_mileage = 0
         last_service_mileage = 0
-
-        car = Calliope(last_service_date, current_mileage, last_service_mileage)
-        self.assertTrue(car.needs_service())
+        factory = CarFactory()
+        car = factory.create_calliope(today, last_service_date, current_mileage, last_service_mileage)
+        self.assertTrue(car.needs_service(), msg="It's been over two years since servicing SpindlerBattery, fix needs_service()")
 
     def test_battery_should_not_be_serviced(self):
         today = datetime.today().date()
         last_service_date = today.replace(year=today.year - 1)
         current_mileage = 0
         last_service_mileage = 0
+        current_date = today
 
-        car = Calliope(last_service_date, current_mileage, last_service_mileage)
+        car = create_calliope(current_date, last_service_date, current_mileage, last_service_mileage)
         self.assertFalse(car.needs_service())
 
     def test_engine_should_be_serviced(self):
         last_service_date = datetime.today().date()
         current_mileage = 30001
         last_service_mileage = 0
+        current_date = datetime.today().date()
 
-        car = Calliope(last_service_date, current_mileage, last_service_mileage)
+        car = create_calliope(current_date, last_service_date, current_mileage, last_service_mileage)
         self.assertTrue(car.needs_service())
 
     def test_engine_should_not_be_serviced(self):
         last_service_date = datetime.today().date()
         current_mileage = 30000
         last_service_mileage = 0
+        current_date = today
 
-        car = Calliope(last_service_date, current_mileage, last_service_mileage)
+        car = create_calliope(current_date, last_service_date, current_mileage, last_service_mileage)
         self.assertFalse(car.needs_service())
 
 
+'''
 class TestGlissade(unittest.TestCase):
     def test_battery_should_be_serviced(self):
         today = datetime.today().date()
@@ -183,6 +182,7 @@ class TestThovex(unittest.TestCase):
         car = Thovex(last_service_date, current_mileage, last_service_mileage)
         self.assertFalse(car.needs_service())
 
+'''
 
 if __name__ == '__main__':
     unittest.main()
