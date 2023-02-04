@@ -3,6 +3,29 @@ import unittest
 from datetime import datetime
 from car_factory import CarFactory
 
+
+class TestCarriganTire(unittest.TestCase):
+    def test_tires_should be serviced(self):
+        tire_array = [0, 0, 0.9, 0]
+        tires = CarriganTire(tire_array)
+        self.assertTrue(tires.needs_service())
+
+    def test_tires_should_not_be_serviced(self):
+        tire_array = [0.1, 0.2, 0.3, 0.4]
+        tires = CarriganTire(tire_array)
+        self.assertFalse(tires.needs_service())
+
+class TestOctoprimeTire(unittest.TestCase):
+    def test_tires_should_be_serviced(self):
+        tire_array = [0.75, 0.75, 0.75, 0.75]
+        tires = OctoprimeTire(tire_array)
+        self.assertTrue(tire.needs_service())
+
+    def test_tires_should_not_be_serviced(self):
+        tire_array = [0.74, 0.75, 0.75, 0.75]
+        tires = OctoprimeTire(tire_array)
+        self.assertFalse(tires.needs_service()) 
+
 class TestCalliope(unittest.TestCase):     
     def test_battery_should_be_serviced(self):
         current_date = datetime.today().date()
