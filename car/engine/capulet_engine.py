@@ -11,5 +11,4 @@ class CapuletEngine(Engine, ABC): # serviced every 30,000 miles
         self.__last_service_mileage = last_service_mileage
 
     def needs_service(self):
-        print("Checking if CapuletEngine needs service")
         return self.__current_mileage - self.__last_service_mileage > 30000

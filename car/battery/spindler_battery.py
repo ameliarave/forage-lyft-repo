@@ -11,11 +11,8 @@ class SpindlerBattery(Battery, ABC):
         self.__current_date = current_date
     
     def needs_service(self):
-        print("Checking if SpindlerBattery needs service")
         service_threshold_date = self.__last_service_date.replace(year=self.__last_service_date.year + 2)
         if service_threshold_date < datetime.today().date():
-            print("SpindlerBattery needs service")
             return True
         else:
-            print("SpindlerBattery doesn't need service")
             return False
